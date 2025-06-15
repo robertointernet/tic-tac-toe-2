@@ -1,13 +1,18 @@
-public class TicTacToe {
-    public static final int BOARD_LENGTH = 3;
+import java.util.List;
+import java.util.function.Supplier;
 
-    private String[][] board;
+public class TicTacToe {
+    public static final int DIMENSION = 3;
+    public static final String EMPTY = "";
+
+    private final String[][] board;
+
 
     public TicTacToe() {
-        this.board = new String[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = "";
+        this.board = new String[DIMENSION][DIMENSION];
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                board[i][j] = EMPTY;
             }
         }
     }
@@ -24,27 +29,49 @@ public class TicTacToe {
     }
 
     public String checkWinner() {
-        // Check rows
-        for (int x = 0; x < 3; x++) {
+        List<Supplier<String>> checks = List.of(
+                this::checkHorizontalWin,
+                this::checkVerticalWin,
+                this::checkDiagonalWin
+        );
+
+        for (Supplier<String> check : checks) {
+            String winner = check.get();
+            if (!winner.equals(EMPTY)) {
+                return winner;
+            }
+        }
+
+        return EMPTY;
+    }
+
+    private String checkHorizontalWin() {
+        for (int x = 0; x < DIMENSION; x++) {
             if (!board[x][0].isEmpty() && board[x][0].equals(board[x][1]) && board[x][0].equals(board[x][2])) {
                 return board[x][0];
             }
         }
+        return EMPTY;
+    }
 
-        // Check columns
-        for (int y   = 0; y < 3; y++) {
+    private String checkVerticalWin() {
+        for (int y = 0; y < DIMENSION; y++) {
             if (!board[0][y].isEmpty() && board[0][y].equals(board[1][y]) && board[0][y].equals(board[2][y])) {
                 return board[0][y];
             }
         }
+        return EMPTY;
+    }
 
-        // Check diagonals
+    private String checkDiagonalWin() {
         if (!board[0][0].isEmpty() && board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2])) {
             return board[0][0];
         }
+
         if (!board[0][2].isEmpty() && board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])) {
             return board[0][2];
         }
-        return ""; // No winner
+        return EMPTY;
     }
+
 }
