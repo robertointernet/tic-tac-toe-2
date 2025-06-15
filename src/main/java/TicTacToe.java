@@ -14,4 +14,7 @@ public class TicTacToe {
         return board;
     }
 
+    public void play(int x, int y, String player) {
+        board[x][y] = player;
+    }
 }

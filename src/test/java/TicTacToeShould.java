@@ -15,4 +15,19 @@ public class TicTacToeShould {
 
         assertArrayEquals(expectedBoard, game.getBoard());
     }
+
+    @Test
+    public void shouldAllowPlayerToMakeAMove() {
+        TicTacToe game = new TicTacToe();
+        game.play(0, 0, "X");
+
+        String[][] expectedBoard = {
+                {"X", "", ""},
+                {"", "", ""},
+                {"", "", ""}
+        };
+
+        assertArrayEquals(expectedBoard, game.getBoard());
+    }
+
 }
