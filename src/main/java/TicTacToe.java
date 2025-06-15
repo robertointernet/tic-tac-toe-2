@@ -15,6 +15,9 @@ public class TicTacToe {
     }
 
     public void play(int x, int y, String player) {
-        board[x][y] = player;
+        if(board[x][y].isEmpty()) {
+            board[x][y] = player;
+        }
+
     }
 }
