@@ -44,4 +44,21 @@ public class TicTacToeShould {
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 
+    @Test
+    public void shouldCheckForHorizontalWin() {
+        TicTacToe game = new TicTacToe();
+        game.play(0, 0, "X");
+        game.play(0, 1, "X");
+        game.play(0, 2, "X");
+
+        String[][] expectedBoard = {
+                {"X", "X", "X"},
+                {"", "", ""},
+                {"", "", ""}
+        };
+
+        assertArrayEquals(expectedBoard, game.getBoard());
+        assertEquals("X", game.checkWinner());
+    }
+
 }
