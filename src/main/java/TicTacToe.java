@@ -32,7 +32,8 @@ public class TicTacToe {
         List<Supplier<String>> checks = List.of(
                 this::checkHorizontalWin,
                 this::checkVerticalWin,
-                this::checkDiagonalWin
+                this::checkDiagonalWin,
+                this::checkTie
         );
 
         for (Supplier<String> check : checks) {
@@ -72,6 +73,17 @@ public class TicTacToe {
             return board[0][2];
         }
         return EMPTY;
+    }
+
+    private String checkTie() {
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (board[i][j].isEmpty()) {
+                    return EMPTY;
+                }
+            }
+        }
+        return "TIE";
     }
 
 }

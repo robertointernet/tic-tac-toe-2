@@ -95,5 +95,26 @@ public class TicTacToeShould {
         assertEquals("X", game.checkWinner());
     }
 
+    @Test
+    public void shouldCheckForTie() {
+        TicTacToe game = new TicTacToe();
+        game.play(0, 0, "X");
+        game.play(0, 1, "O");
+        game.play(0, 2, "X");
+        game.play(1, 0, "O");
+        game.play(1, 1, "X");
+        game.play(1, 2, "O");
+        game.play(2, 0, "O");
+        game.play(2, 1, "X");
+        game.play(2, 2, "O");
 
+        String[][] expectedBoard = {
+                {"X", "O", "X"},
+                {"O", "X", "O"},
+                {"O", "X", "O"}
+        };
+
+        assertArrayEquals(expectedBoard, game.getBoard());
+        assertEquals("TIE", game.checkWinner()); // No winner
+    }
 }
