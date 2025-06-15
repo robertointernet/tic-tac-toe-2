@@ -78,4 +78,20 @@ public class TicTacToeShould {
         assertEquals("X", game.checkWinner());
     }
 
+    @Test
+    public void shouldCheckForDiagonalWin() {
+        TicTacToe game = new TicTacToe();
+        game.play(0, 0, "X");
+        game.play(1, 1, "X");
+        game.play(2, 2, "X");
+
+        String[][] expectedBoard = {
+                {"X", "", ""},
+                {"", "X", ""},
+                {"", "", "X"}
+        };
+
+        assertArrayEquals(expectedBoard, game.getBoard());
+        assertEquals("X", game.checkWinner());
+    }
 }
