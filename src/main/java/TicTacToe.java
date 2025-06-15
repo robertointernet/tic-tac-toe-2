@@ -29,6 +29,14 @@ public class TicTacToe {
             }
         }
 
+        // Check columns
+        for (int j = 0; j < 3; j++) {
+            if (!board[0][j].isEmpty() && board[0][j].equals(board[1][j]) && board[0][j].equals(board[2][j])) {
+                return board[0][j];
+            }
+        }
+
+
         return ""; // No winner
     }
 }
