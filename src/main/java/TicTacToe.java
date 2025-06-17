@@ -4,16 +4,14 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class TicTacToe {
+    public static final String TIE = "TIE";
     private static final int DIMENSION = 3;
     private static final String EMPTY = "";
     private static final String X = "X";
     private static final String O = "O";
-    public static final String TIE = "TIE";
-    private String currentPlayer = X;
-
     private final String[][] board;
     private final Random random = new Random(); // For random bot moves
-
+    private String currentPlayer = X;
 
 
     public TicTacToe() {
@@ -27,7 +25,7 @@ public class TicTacToe {
 
 
     public void play(int x, int y) {
-        if(board[x][y].isEmpty()) {
+        if (board[x][y].isEmpty()) {
             board[x][y] = currentPlayer;
             switchPlayer();
         }
@@ -136,6 +134,6 @@ public class TicTacToe {
                 sb.append("---+---+---\n");
             }
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 }
