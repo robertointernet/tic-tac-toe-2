@@ -8,7 +8,7 @@ public class TicTacToe {
     private static final String EMPTY = "";
     private static final String X = "X";
     private static final String O = "O";
-    private static final String TIE = "TIE";
+    public static final String TIE = "TIE";
     private String currentPlayer = X;
 
     private final String[][] board;
@@ -25,9 +25,6 @@ public class TicTacToe {
         }
     }
 
-    public String[][] getBoard() {
-        return board;
-    }
 
     public void play(int x, int y) {
         if(board[x][y].isEmpty()) {
@@ -119,6 +116,10 @@ public class TicTacToe {
 
     public String getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public String[][] getBoard() {
+        return board;
     }
 
     public void printBoard() {
