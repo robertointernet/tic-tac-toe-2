@@ -117,4 +117,22 @@ public class TicTacToeShould {
         assertArrayEquals(expectedBoard, game.getBoard());
         assertEquals("TIE", game.checkWinner()); // No winner
     }
+
+    @Test
+    public void shouldAllowBotPlayerToMakeMove() {
+        TicTacToe game = new TicTacToe();
+        game.botPlay();
+        assertEquals("O", game.getCurrentPlayer());
+    }
+
+    @Test
+    public void shouldAllowBotPlayAWholeGame() {
+        TicTacToe game = new TicTacToe();
+        while (game.checkWinner().isEmpty()) {
+            game.botPlay();
+        }
+
+        assertNotEquals("", game.getCurrentPlayer());
+    }
+
 }

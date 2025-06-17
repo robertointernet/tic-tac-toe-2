@@ -1,11 +1,18 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Supplier;
 
 public class TicTacToe {
-    public static final int DIMENSION = 3;
-    public static final String EMPTY = "";
+    private static final int DIMENSION = 3;
+    private static final String EMPTY = "";
+    private static final String X = "X";
+    private static final String O = "O";
+    private String currentPlayer = X;
 
     private final String[][] board;
+    private final Random random = new Random(); // For random bot moves
+
 
 
     public TicTacToe() {
@@ -86,4 +93,30 @@ public class TicTacToe {
         return "TIE";
     }
 
+    private void switchPlayer() {
+        currentPlayer = (currentPlayer.equals(X)) ? O : X;
+    }
+
+    public void botPlay() {
+        List<int[]> emptyCells = new ArrayList<>();
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (board[i][j].isEmpty()) {
+                    emptyCells.add(new int[]{i, j});
+                }
+            }
+        }
+
+        if (emptyCells.isEmpty()) {
+            return; // No moves left
+        }
+
+        int[] chosenMove = emptyCells.get(random.nextInt(emptyCells.size()));
+        switchPlayer();
+        play(chosenMove[0], chosenMove[1], currentPlayer); // Use the existing play method
+    }
+
+    public String getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
