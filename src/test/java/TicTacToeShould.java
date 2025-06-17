@@ -19,7 +19,7 @@ public class TicTacToeShould {
     @Test
     public void shouldAllowPlayerToMakeMove() {
         TicTacToe game = new TicTacToe();
-        game.play(0, 0, "X");
+        game.play(0, 0);
 
         String[][] expectedBoard = {
                 {"X", "", ""},
@@ -33,8 +33,8 @@ public class TicTacToeShould {
     @Test
     public void shouldNotAllowOverwriteMove() {
         TicTacToe game = new TicTacToe();
-        game.play(0, 0, "X");
-        game.play(0, 0, "Y");
+        game.play(0, 0);
+        game.play(0, 0);
         String[][] expectedBoard = {
                 {"X", "", ""},
                 {"", "", ""},
@@ -47,13 +47,15 @@ public class TicTacToeShould {
     @Test
     public void shouldCheckForHorizontalWin() {
         TicTacToe game = new TicTacToe();
-        game.play(0, 0, "X");
-        game.play(0, 1, "X");
-        game.play(0, 2, "X");
+        game.play(0, 0);
+        game.play(1, 0);
+        game.play(0, 1);
+        game.play(1, 1);
+        game.play(0, 2);
 
         String[][] expectedBoard = {
                 {"X", "X", "X"},
-                {"", "", ""},
+                {"O", "O", ""},
                 {"", "", ""}
         };
 
@@ -64,12 +66,14 @@ public class TicTacToeShould {
     @Test
     public void shouldCheckForVerticalWin() {
         TicTacToe game = new TicTacToe();
-        game.play(0, 0, "X");
-        game.play(1, 0, "X");
-        game.play(2, 0, "X");
+        game.play(0, 0);
+        game.play(0, 1);
+        game.play(1, 0);
+        game.play(0, 2);
+        game.play(2, 0);
 
         String[][] expectedBoard = {
-                {"X", "", ""},
+                {"X", "O", "O"},
                 {"X", "", ""},
                 {"X", "", ""}
         };
@@ -81,12 +85,14 @@ public class TicTacToeShould {
     @Test
     public void shouldCheckForDiagonalWin() {
         TicTacToe game = new TicTacToe();
-        game.play(0, 0, "X");
-        game.play(1, 1, "X");
-        game.play(2, 2, "X");
+        game.play(0, 0);
+        game.play(0, 1);
+        game.play(1, 1);
+        game.play(0, 2);
+        game.play(2, 2);
 
         String[][] expectedBoard = {
-                {"X", "", ""},
+                {"X", "O", "O"},
                 {"", "X", ""},
                 {"", "", "X"}
         };
@@ -98,22 +104,24 @@ public class TicTacToeShould {
     @Test
     public void shouldCheckForTie() {
         TicTacToe game = new TicTacToe();
-        game.play(0, 0, "X");
-        game.play(0, 1, "O");
-        game.play(0, 2, "X");
-        game.play(1, 0, "O");
-        game.play(1, 1, "X");
-        game.play(1, 2, "O");
-        game.play(2, 0, "O");
-        game.play(2, 1, "X");
-        game.play(2, 2, "O");
+        game.play(0, 0);
+        game.play(0, 1);
+        game.play(0, 2);
+        game.play(1, 1);
+        game.play(1, 0);
+        game.play(1, 2);
+
+        game.play(2, 1);
+        game.play(2, 0);
+        game.play(2, 2);
 
         String[][] expectedBoard = {
                 {"X", "O", "X"},
-                {"O", "X", "O"},
-                {"O", "X", "O"}
+                {"X", "O", "O"},
+                {"O", "X", "X"}
         };
 
+        game.printBoard();
         assertArrayEquals(expectedBoard, game.getBoard());
         assertEquals("TIE", game.checkWinner()); // No winner
     }

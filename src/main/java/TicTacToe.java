@@ -8,6 +8,7 @@ public class TicTacToe {
     private static final String EMPTY = "";
     private static final String X = "X";
     private static final String O = "O";
+    private static final String TIE = "TIE";
     private String currentPlayer = X;
 
     private final String[][] board;
@@ -28,9 +29,10 @@ public class TicTacToe {
         return board;
     }
 
-    public void play(int x, int y, String player) {
+    public void play(int x, int y) {
         if(board[x][y].isEmpty()) {
-            board[x][y] = player;
+            board[x][y] = currentPlayer;
+            switchPlayer();
         }
 
     }
@@ -90,7 +92,7 @@ public class TicTacToe {
                 }
             }
         }
-        return "TIE";
+        return TIE;
     }
 
     private void switchPlayer() {
@@ -112,11 +114,27 @@ public class TicTacToe {
         }
 
         int[] chosenMove = emptyCells.get(random.nextInt(emptyCells.size()));
-        switchPlayer();
-        play(chosenMove[0], chosenMove[1], currentPlayer); // Use the existing play method
+        play(chosenMove[0], chosenMove[1]);
     }
 
     public String getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public void printBoard() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                sb.append(board[i][j].isEmpty() ? "." : board[i][j]);
+                if (j < DIMENSION - 1) {
+                    sb.append(" | ");
+                }
+            }
+            sb.append("\n");
+            if (i < DIMENSION - 1) {
+                sb.append("---+---+---\n");
+            }
+        }
+        System.out.println(sb.toString());
     }
 }
